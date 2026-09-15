@@ -64,19 +64,18 @@ curl -fsSL $BASE/install-selfhost.sh \
 Lấy `<hex-tu-file-.sha256>`:
 
 ```bash
-curl -fsSL https://github.com/cuongtm2012/cadence-dist/releases/latest/download/cadence-bundle.tar.gz.sha256 | awk '{print $1}'
+curl -fsSL $BASE/cadence-bundle.tar.gz.sha256 | awk '{print $1}'
 ```
 
 > **Tương thích:** `--bundle-url` / `--bundle-sha256` là thay đổi SPEC §4 — chỉ có ở installer
-> build đã gồm §4. **Kiểm tra trước khi dùng:**
+> build đã gồm §4 (từ `v0.1.2` trở đi). **Kiểm tra trước khi dùng** (pin tag, đừng dùng `latest`):
 > ```bash
-> curl -fsSL https://github.com/cuongtm2012/cadence-dist/releases/latest/download/install-selfhost.sh \
+> curl -fsSL $BASE/install-selfhost.sh \
 >   | grep -q -- '--bundle-url' && echo "installer OK (hỗ trợ --bundle-url)" \
 >   || echo "installer này CHƯA hỗ trợ --bundle-url — liên hệ maintainer"
 > ```
-> ⚠️ Bản `install-selfhost.sh` của release `v0.1.1` là bản **trước §4** ⇒ chưa có `--bundle-url`.
-> Dùng đường cũ `--dist-url=/--dist-token=` với release đó, hoặc chờ release kế tiếp.
-> Đường cũ `--dist-url=/--dist-token=` (control prod M1) vẫn giữ để backward-compat.
+> ⚠️ `install-selfhost.sh` của release `v0.1.1` là bản **trước §4** ⇒ chưa có `--bundle-url`
+> (đừng cài bằng tag đó). Đường cũ `--dist-url=/--dist-token=` (control prod M1) vẫn giữ để backward-compat.
 
 **Idempotent:** chạy lại installer = update. Nếu sha bundle khớp `.bundle_sha256` và
 `cadence-engine` đang active thì installer **bỏ qua** việc tải lại.
