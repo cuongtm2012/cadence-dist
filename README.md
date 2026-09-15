@@ -54,7 +54,15 @@ Lấy `<hex-tu-file-.sha256>`:
 curl -fsSL https://github.com/cuongtm2012/cadence-dist/releases/latest/download/cadence-bundle.tar.gz.sha256 | awk '{print $1}'
 ```
 
-> Lưu ý: `--bundle-url` / `--bundle-sha256` cần installer build ≥ 0.1.1 (SPEC §4).
+> **Tương thích:** `--bundle-url` / `--bundle-sha256` là thay đổi SPEC §4 — chỉ có ở installer
+> build đã gồm §4. **Kiểm tra trước khi dùng:**
+> ```bash
+> curl -fsSL https://github.com/cuongtm2012/cadence-dist/releases/latest/download/install-selfhost.sh \
+>   | grep -q -- '--bundle-url' && echo "installer OK (hỗ trợ --bundle-url)" \
+>   || echo "installer này CHƯA hỗ trợ --bundle-url — liên hệ maintainer"
+> ```
+> ⚠️ Bản `install-selfhost.sh` của release `v0.1.1` là bản **trước §4** ⇒ chưa có `--bundle-url`.
+> Dùng đường cũ `--dist-url=/--dist-token=` với release đó, hoặc chờ release kế tiếp.
 > Đường cũ `--dist-url=/--dist-token=` (control prod M1) vẫn giữ để backward-compat.
 
 **Idempotent:** chạy lại installer = update. Nếu sha bundle khớp `.bundle_sha256` và
