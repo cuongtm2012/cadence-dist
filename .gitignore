@@ -1,0 +1,12 @@
+# Artifact của Cadence chỉ nằm trong GitHub Releases — KHÔNG commit vào git tree.
+*.tar.gz
+*.tar.gz.sha256
+*.sha256
+
+# macOS
+.DS_Store
+._*
+
+# staging khi release
+.staging/
+dist-staging/
