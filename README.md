@@ -15,14 +15,19 @@ Repo này **CHỈ chứa tài liệu + artifact phát hành**. **KHÔNG chứa s
 
 Tên asset **không đổi giữa các version** ⇒ URL `releases/latest/download/<asset>` là hợp đồng bất biến (SPEC §3).
 
+> ⚠️ **Alias `latest` trễ CDN vài chục giây sau khi publish** — có thể trả **asset của tag CŨ**
+> (đã đo thật 15/09/2026: v0.1.2 publish xong, `latest` vẫn trả asset v0.1.1).
+> **Deploy thật: PIN tag cụ thể** — `releases/download/v<version>/<asset>`.
+> Dùng `latest` chỉ để xem bản mới nhất, không để cài.
+
 ## URL bất biến
 
 ```
 Repo          : https://github.com/cuongtm2012/cadence-dist
-Latest release: https://github.com/cuongtm2012/cadence-dist/releases/latest
-Bundle        : .../releases/latest/download/cadence-bundle.tar.gz
-Checksum      : .../releases/latest/download/cadence-bundle.tar.gz.sha256
-Installer     : .../releases/latest/download/install-selfhost.sh
+Latest release: https://github.com/cuongtm2012/cadence-dist/releases/latest   (chỉ để TRA CỨU)
+Bundle        : .../releases/download/v<TAG>/cadence-bundle.tar.gz            (dùng cái này để CÀI)
+Checksum      : .../releases/download/v<TAG>/cadence-bundle.tar.gz.sha256
+Installer     : .../releases/download/v<TAG>/install-selfhost.sh
 ```
 
 ## Cách cài trên máy client
@@ -30,17 +35,25 @@ Installer     : .../releases/latest/download/install-selfhost.sh
 **Bước 1 — tải checksum + verify bundle (khuyến nghị làm trước):**
 
 ```bash
-curl -fsSLO https://github.com/cuongtm2012/cadence-dist/releases/latest/download/cadence-bundle.tar.gz.sha256
-curl -fsSLO https://github.com/cuongtm2012/cadence-dist/releases/latest/download/cadence-bundle.tar.gz
+# Đặt TAG = tag release cần cài (vd v0.1.2) — KHÔNG dùng 'latest' để cài
+TAG=v0.1.2
+BASE=https://github.com/cuongtm2012/cadence-dist/releases/download/$TAG
+
+curl -fsSLO $BASE/cadence-bundle.tar.gz.sha256
+curl -fsSLO $BASE/cadence-bundle.tar.gz
 sha256sum -c cadence-bundle.tar.gz.sha256     # macOS: shasum -a 256 -c cadence-bundle.tar.gz.sha256
 ```
 
 **Bước 2 — one-liner cài/​update (chạy bằng root trên máy client):**
 
 ```bash
-curl -fsSL https://github.com/cuongtm2012/cadence-dist/releases/latest/download/install-selfhost.sh \
+# Đặt TAG = tag release cần cài (vd v0.1.2) — KHÔNG dùng 'latest' để cài
+TAG=v0.1.2
+BASE=https://github.com/cuongtm2012/cadence-dist/releases/download/$TAG
+
+curl -fsSL $BASE/install-selfhost.sh \
   | sudo bash -s -- \
-      --bundle-url=https://github.com/cuongtm2012/cadence-dist/releases/latest/download/cadence-bundle.tar.gz \
+      --bundle-url=$BASE/cadence-bundle.tar.gz \
       --bundle-sha256=<hex-tu-file-.sha256> \
       --engine-key=<engine_key> \
       --activation-token=<activation_token> \
