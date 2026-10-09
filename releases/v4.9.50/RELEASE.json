@@ -1,0 +1,35 @@
+{
+  "built_at": "2026-10-09T12:49:26+00:00",
+  "bundle": "cadence-bundle.tar.gz",
+  "bundle_sha256": "cdfa7fba83ec3f9e168aa05f302d6b0e60c1e46a5d18a2a89f6365140ae09250",
+  "commit": "a235c72a3d635d9f4b393f03cd816dbb9b74d6fa",
+  "core_files": [
+    "dca_bot.py",
+    "binance_client.py",
+    "manager.py",
+    "state.py",
+    "strategy.py",
+    "entry_guard.py",
+    "_filelock.py",
+    "coin_screener.py",
+    "coin_memory.py",
+    "onboard_cache.py",
+    "attribution.py"
+  ],
+  "core_md5": {
+    "_filelock.py": "40533822156b1f59531b56fa6485e35f",
+    "attribution.py": "06837412160ae79e9e384a4742654c4b",
+    "binance_client.py": "f427a7438f8a81fc77fa32e615f69388",
+    "coin_memory.py": "39a404e7e45c9392a2e609a2f93f52ac",
+    "coin_screener.py": "4cd9755f103582f3a560acc4a5956c64",
+    "dca_bot.py": "5cfe08bcff76bd772992bd95f8138695",
+    "entry_guard.py": "ab4eb24ed4a40abe4244de6c6fe62b1b",
+    "manager.py": "27b7123b995c70511e2a2021376c12a9",
+    "onboard_cache.py": "b3a90a5c476b164f43203da7eff23743",
+    "state.py": "41234759047e6d21aef14a8266d5d778",
+    "strategy.py": "c40d95b9164a6bc6890374000bf37b26"
+  },
+  "repo": "cuongtm2012/bot_binance_dca",
+  "run_id": "37932426482",
+  "tag": "v4.9.50"
+}
